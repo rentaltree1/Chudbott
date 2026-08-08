@@ -9,27 +9,27 @@
 <body>
     <div class="app-container">
         <nav class="sidebar">
-            <div class="icon top-icon">👻</div>
-            <div class="icon bottom-icon">⚙️</div>
+            <div class="icon-top">👻</div>
+            <div class="icon-bottom">⚙️</div>
         </nav>
-        
-        <main class="main-content center-layout" id="mainArea">
+
+        <main class="main-content initial" id="mainArea">
+            <div class="chat-container" id="chatContainer">
+                </div>
             
-            <div class="welcome-screen" id="welcomeScreen">
+            <div class="greeting" id="greeting">
                 <h1>Hi Human</h1>
             </div>
             
-            <div class="chat-container" id="chatContainer">
-                </div>
-
             <div class="input-wrapper" id="inputWrapper">
-                <span class="plus-icon">+</span>
-                <input type="text" id="promptInput" autofocus>
+                <div class="input-pill">
+                    <span class="plus-icon">+</span>
+                    <input type="text" id="chatInput" autocomplete="off" autofocus>
+                </div>
             </div>
-            
         </main>
     </div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
