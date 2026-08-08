@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChudBot</title>
-  
-  <link rel="stylesheet" href="style.css">
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChudBot</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="icon top-icon">👻</div>
+            <div class="icon bottom-icon">⚙️</div>
+        </nav>
+        
+        <main class="main-content center-layout" id="mainArea">
+            
+            <div class="welcome-screen" id="welcomeScreen">
+                <h1>Hi Human</h1>
+            </div>
+            
+            <div class="chat-container" id="chatContainer">
+                </div>
 
-  <div class="chat-wrapper">
-    
-    <div class="chat-container">
-      <div class="message bot-message">
-        <span>ChudBot:</span> Hello!
-      </div>
-      <div class="message user-message">
-        <span>You:</span> Hey, testing the layout.
-      </div>
+            <div class="input-wrapper" id="inputWrapper">
+                <span class="plus-icon">+</span>
+                <input type="text" id="promptInput" autofocus>
+            </div>
+            
+        </main>
     </div>
 
-    <div class="input-container">
-      <button class="add-btn">+</button>
-      <input type="text" placeholder="Type a message...">
-    </div>
-
-  </div>
-
+    <script src="script.js"></script>
 </body>
 </html>
