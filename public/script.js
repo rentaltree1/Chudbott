@@ -1,25 +1,25 @@
-const promptInput = document.getElementById('promptInput');
+const chatInput = document.getElementById('chatInput');
 const mainArea = document.getElementById('mainArea');
 const chatContainer = document.getElementById('chatContainer');
 let isFirstMessage = true;
 
-promptInput.addEventListener('keypress', async (e) => {
-    if (e.key === 'Enter' && promptInput.value.trim() !== '') {
-        const text = promptInput.value.trim();
-        promptInput.value = ''; // Clear input
+chatInput.addEventListener('keypress', async (e) => {
+    if (e.key === 'Enter' && chatInput.value.trim() !== '') {
+        const text = chatInput.value.trim();
+        chatInput.value = '';
 
-        // 1. Trigger Layout Change on First Message
+        // Trigger layout shift on the very first message
         if (isFirstMessage) {
-            mainArea.classList.remove('center-layout');
-            mainArea.classList.add('chat-layout');
+            mainArea.classList.remove('initial');
+            mainArea.classList.add('chatting');
             isFirstMessage = false;
         }
 
-        // 2. Add User Message to UI
-        addMessage('You', text, 'user');
+        // Display user's message
+        appendMessage('You', text, 'user-message');
 
-        // 3. Fetch Response from server.js
         try {
+            // Send request to the backend API defined in server.js
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -28,42 +28,34 @@ promptInput.addEventListener('keypress', async (e) => {
             
             const data = await response.json();
             
+            // Display bot's response
             if (data.success) {
-                addMessage('ChudBot', data.text, 'bot');
+                appendMessage('ChudBot', data.text, 'bot-message');
             } else {
-                addMessage('System', 'Error: ' + data.text, 'bot');
+                appendMessage('System', 'Error: ' + data.text, 'bot-message');
             }
-        } catch (error) {
-            console.error("Fetch error:", error);
-            addMessage('System', 'Failed to connect to backend.', 'bot');
+        } catch (err) {
+            console.error(err);
+            appendMessage('System', 'Connection failed. Is the server running?', 'bot-message');
         }
     }
 });
 
-function addMessage(sender, text, type) {
-    // Create outer row
-    const row = document.createElement('div');
-    row.className = `message-row ${type}`;
+// Function to generate chat bubbles dynamically
+function appendMessage(sender, text, className) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `message ${className}`;
     
-    // Create inner content wrapper
-    const content = document.createElement('div');
-    content.className = 'message-content';
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'message-label';
+    labelDiv.textContent = `${sender}:`;
     
-    // Create sender label
-    const label = document.createElement('div');
-    label.className = 'message-label';
-    label.textContent = `${sender}:`;
+    const contentDiv = document.createElement('div');
+    contentDiv.textContent = text;
     
-    // Create message text
-    const messageBody = document.createElement('div');
-    messageBody.className = 'message-body';
-    messageBody.textContent = text;
-    
-    // Assemble and append
-    content.appendChild(label);
-    content.appendChild(messageBody);
-    row.appendChild(content);
-    chatContainer.appendChild(row);
+    msgDiv.appendChild(labelDiv);
+    msgDiv.appendChild(contentDiv);
+    chatContainer.appendChild(msgDiv);
     
     // Auto-scroll to the newest message
     chatContainer.scrollTop = chatContainer.scrollHeight;
