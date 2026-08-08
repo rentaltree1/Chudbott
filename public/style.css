@@ -1,0 +1,66 @@
+/* Center the whole chat UI and set a max-width */
+.chat-wrapper {
+  max-width: 800px; /* Adjust this to make the chat wider or narrower */
+  margin: 0 auto;   /* Centers the wrapper on the page */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;    /* Fills the screen height */
+  padding: 20px;
+  box-sizing: border-box; /* Ensures padding doesn't break the width */
+}
+
+/* Make the chat area fill the available space above the input */
+.chat-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+  overflow-y: auto; /* Adds scrolling if messages get too long */
+  padding-bottom: 20px;
+}
+
+/* Base message style */
+.message {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Push user messages to the far right edge of the wrapper */
+.user-message {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* Push bot messages to the far left edge of the wrapper */
+.bot-message {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Style the input container to match the width perfectly */
+.input-container {
+  display: flex;
+  align-items: center;
+  background-color: #333; 
+  border-radius: 20px;
+  padding: 10px 15px;
+  width: 100%; /* It will perfectly match the 800px max-width of the wrapper */
+  box-sizing: border-box;
+}
+
+.add-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.input-container input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+}
